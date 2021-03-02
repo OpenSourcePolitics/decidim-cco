@@ -6,8 +6,8 @@ Decidim.configure do |config|
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
-  config.default_locale = :fr
-  config.available_locales = [:en, :fr]
+  config.default_locale = :nl
+  config.available_locales = [:en, :fr, :nl]
 
   config.maximum_attachment_height_or_width = 6000
 
@@ -19,13 +19,7 @@ Decidim.configure do |config|
     }
   end
 
-  if defined?(Decidim::Initiatives) && defined?(Decidim::Initiatives.do_not_require_authorization)
-    # puts "Decidim::Initiatives are loaded"
-    Decidim::Initiatives.minimum_committee_members = 1
-    Decidim::Initiatives.do_not_require_authorization = true
-    Decidim::Initiatives.print_enabled = false
-    Decidim::Initiatives.face_to_face_voting_allowed = false
-  end
+
 
 
   # Custom resource reference generator method

@@ -12,13 +12,7 @@ class MoveProposalsFieldsToI18n < ActiveRecord::Migration[5.2]
       Decidim::Proposals::Proposal.find_each do |proposal|
         author = proposal.coauthorships.first.author
 
-        locale = if author
-                   author.try(:locale).presence || author.try(:default_locale).presence || author.try(:organization).try(:default_locale).presence
-                 elsif proposal.component && proposal.component.participatory_space
-                   proposal.component.participatory_space.organization.default_locale
-                 else
-                   I18n.default_locale.to_s
-                 end
+        locale = author.try(:locale).presence || author.try(:default_locale).presence || author.try(:organization).try(:default_locale).presence
 
         proposal.new_title = {
           locale => proposal.title
@@ -27,7 +21,8 @@ class MoveProposalsFieldsToI18n < ActiveRecord::Migration[5.2]
           locale => proposal.body
         }
 
-        proposal.save(validate: false)
+        proposal.update_column("new_title", proposal.new_title)
+        proposal.update_column("new_body", proposal.new_body)
       end
     end
 

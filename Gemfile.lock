@@ -16,7 +16,7 @@ GIT
       decidim-core
 
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module_cookies.git
+  remote: https://github.com/OpenSourcePolitics/decidim-module_cookies
   revision: 685ee81b4b9fd3dca3715a34e320b616eefeac24
   branch: release/0.23-stable
   specs:
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/decidim/decidim.git
-  revision: 0bb15b5915e023782eb1b62d14a7826a1517e1d7
+  revision: 6d93727b0b91ed9c05c563008198f3fd06cc04e8
   branch: release/0.23-stable
   specs:
     decidim (0.23.1)
@@ -86,6 +86,15 @@ GIT
       decidim-core (= 0.23.1)
       jquery-rails (~> 4.3)
       redcarpet (~> 3.4)
+    decidim-conferences (0.23.1)
+      decidim-core (= 0.23.1)
+      decidim-meetings (= 0.23.1)
+      wicked_pdf (~> 1.4)
+      wkhtmltopdf-binary (~> 0.12)
+    decidim-consultations (0.23.1)
+      decidim-admin (= 0.23.1)
+      decidim-comments (= 0.23.1)
+      decidim-core (= 0.23.1)
     decidim-core (0.23.1)
       active_link_to (~> 1.0)
       anchored (>= 1.1.0)
@@ -181,6 +190,17 @@ GIT
       wkhtmltopdf-binary (~> 0.12)
     decidim-generators (0.23.1)
       decidim-core (= 0.23.1)
+    decidim-initiatives (0.23.1)
+      decidim-admin (= 0.23.1)
+      decidim-comments (= 0.23.1)
+      decidim-core (= 0.23.1)
+      decidim-verifications (= 0.23.1)
+      kaminari (~> 1.2, >= 1.2.1)
+      origami (~> 2.1)
+      virtus-multiparams (~> 0.1)
+      wicked (~> 1.3)
+      wicked_pdf (~> 1.4)
+      wkhtmltopdf-binary (~> 0.12)
     decidim-meetings (0.23.1)
       cells-erb (~> 0.1.0)
       cells-rails (~> 0.0.9)
@@ -276,9 +296,11 @@ GEM
       activerecord (>= 3.0)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    aes_key_wrap (1.1.0)
     anchored (1.1.0)
     arel (9.0.0)
     ast (2.4.1)
+    attr_required (1.0.1)
     autoprefixer-rails (8.6.5)
       execjs
     axiom-types (0.1.1)
@@ -299,13 +321,14 @@ GEM
       html_tokenizer (~> 0.0.6)
       parser (>= 2.4)
       smart_properties
+    bindata (2.4.8)
     bindex (0.8.1)
-    bootsnap (1.4.8)
+    bootsnap (1.5.1)
       msgpack (~> 1.0)
     browser (2.7.1)
     builder (3.2.4)
     byebug (11.1.3)
-    capybara (3.33.0)
+    capybara (3.34.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -329,7 +352,7 @@ GEM
       actionpack (>= 3.0)
       cells (>= 4.1.6, < 5.0.0)
     charlock_holmes (0.7.7)
-    chef-utils (16.7.61)
+    chef-utils (16.8.14)
     childprocess (3.0.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -340,13 +363,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     crack (0.4.4)
     crass (1.0.6)
     css_parser (1.7.1)
       addressable
-    dalli (2.7.10)
+    dalli (2.7.11)
     date_validator (0.9.0)
       activemodel
       activesupport
@@ -395,12 +419,12 @@ GEM
       smart_properties
     erbse (0.1.4)
       temple
-    erubi (1.9.0)
+    erubi (1.10.0)
     et-orbi (1.2.4)
       tzinfo
     etherpad-lite (0.3.0)
       rest-client (>= 1.6)
-    excon (0.76.0)
+    excon (0.78.1)
     execjs (2.7.0)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -409,13 +433,14 @@ GEM
       railties (>= 3.0.0)
     faker (1.9.6)
       i18n (>= 0.7)
-    faraday (1.0.1)
+    faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
+      ruby2_keywords
     ffi (1.13.1)
     file_validators (2.3.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
-    fog-aws (3.6.7)
+    fog-aws (3.7.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -442,9 +467,9 @@ GEM
       activesupport (>= 4.1, < 6.0)
       railties (>= 4.1, < 6.0)
       tzinfo (~> 1.2, >= 1.2.2)
-    fugit (1.3.9)
+    fugit (1.4.1)
       et-orbi (~> 1.1, >= 1.1.8)
-      raabro (~> 1.3)
+      raabro (~> 1.4)
     geocoder (1.6.4)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -463,6 +488,7 @@ GEM
     httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
+    httpclient (2.8.3)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.31)
@@ -489,6 +515,10 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-tmpl-rails (1.1.0)
       rails (>= 3.1.0)
+    json-jwt (1.13.0)
+      activesupport (>= 4.2)
+      aes_key_wrap
+      bindata
     jwt (2.2.2)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -514,7 +544,7 @@ GEM
       actionmailer (>= 3.2)
       letter_opener (~> 1.0)
       railties (>= 3.2)
-    listen (3.2.1)
+    listen (3.3.3)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     lograge (0.11.2)
@@ -538,7 +568,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.0512)
+    mime-types-data (3.2020.1104)
     mimemagic (0.3.5)
     mini_magick (4.11.0)
     mini_mime (1.0.2)
@@ -555,7 +585,7 @@ GEM
     multipart-post (2.1.1)
     mustache (1.1.1)
     netrc (0.11.0)
-    newrelic_rpm (6.13.0)
+    newrelic_rpm (6.14.0)
     nio4r (2.5.4)
     nobspw (0.6.2)
     nokogiri (1.10.10)
@@ -572,8 +602,9 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
-    omniauth-google-oauth2 (0.8.0)
+    omniauth-google-oauth2 (0.8.1)
       jwt (>= 2.0)
+      oauth2 (~> 1.1)
       omniauth (>= 1.1.1)
       omniauth-oauth2 (>= 1.6)
     omniauth-oauth (1.1.0)
@@ -588,6 +619,22 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
+    omniauth_openid_connect (0.3.5)
+      addressable (~> 2.5)
+      omniauth (~> 1.9)
+      openid_connect (~> 1.1)
+    openid_connect (1.2.0)
+      activemodel
+      attr_required (>= 1.0.0)
+      json-jwt (>= 1.5.0)
+      rack-oauth2 (>= 1.6.1)
+      swd (>= 1.0.0)
+      tzinfo
+      validate_email
+      validate_url
+      webfinger (>= 1.0.1)
+    origami (2.1.0)
+      colorize (~> 0.7)
     orm_adapter (0.5.0)
     paper_trail (10.3.1)
       activerecord (>= 4.2)
@@ -595,7 +642,7 @@ GEM
     parallel (1.20.1)
     parser (2.7.2.0)
       ast (~> 2.4.1)
-    passenger (6.0.6)
+    passenger (6.0.7)
       rack
       rake (>= 0.8.1)
     pg (1.1.4)
@@ -610,14 +657,20 @@ GEM
       actionmailer (>= 3)
       premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.6)
-    puma (4.3.6)
+    puma (4.3.7)
       nio4r (~> 2.0)
-    raabro (1.3.1)
+    raabro (1.4.0)
     rack (2.2.3)
     rack-attack (6.3.1)
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-oauth2 (1.16.0)
+      activesupport
+      attr_required
+      httpclient
+      json-jwt (>= 1.11.0)
+      rack (>= 2.1.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.4)
@@ -668,7 +721,7 @@ GEM
       virtus (~> 1.0.5)
       wisper (>= 1.6.1)
     redcarpet (3.5.0)
-    redis (4.2.2)
+    redis (4.2.5)
     regexp_parser (1.8.2)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -726,6 +779,7 @@ GEM
       rubocop (>= 0.68.1)
     ruby-ole (1.2.12.2)
     ruby-progressbar (1.10.1)
+    ruby2_keywords (0.0.2)
     ruby_http_client (3.5.1)
     rubyzip (2.0.0)
     rufus-scheduler (3.6.0)
@@ -747,11 +801,13 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    sendgrid-ruby (6.3.4)
+    sendgrid-ruby (6.3.7)
       ruby_http_client (~> 3.4)
     sentry-rails (4.2.0)
       rails (>= 5.0)
       sentry-ruby-core (~> 4.2.0)
+    sentry-raven (3.1.1)
+      faraday (>= 1.0)
     sentry-ruby (4.2.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       faraday (>= 1.0)
@@ -799,6 +855,10 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    swd (1.2.0)
+      activesupport (>= 3)
+      attr_required (>= 0.0.5)
+      httpclient (>= 2.4)
     system_test_html_screenshots (0.1.2)
       actionpack (>= 5.2, < 6.0.a)
     temple (0.8.2)
@@ -813,7 +873,7 @@ GEM
     truncato (0.7.11)
       htmlentities (~> 4.3.1)
       nokogiri (>= 1.7.0, <= 2.0)
-    tzinfo (1.2.7)
+    tzinfo (1.2.8)
       thread_safe (~> 0.1)
     uber (0.1.0)
     uglifier (4.2.0)
@@ -825,11 +885,19 @@ GEM
     valid_email2 (2.3.1)
       activemodel (>= 3.2)
       mail (~> 2.5)
+    validate_email (0.1.6)
+      activemodel (>= 3.0)
+      mail (>= 2.2.5)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    virtus-multiparams (0.1.1)
+      virtus (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (3.7.0)
@@ -837,6 +905,9 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webfinger (1.1.0)
+      activesupport
+      httpclient (>= 2.4)
     webmock (3.10.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -844,6 +915,8 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wicked (1.3.4)
+      railties (>= 3.0.7)
     wicked_pdf (1.4.0)
       activesupport
     wisper (2.0.1)
@@ -860,8 +933,11 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-conferences!
+  decidim-consultations!
   decidim-cookies!
   decidim-dev!
+  decidim-initiatives!
   decidim-navbar_links!
   decidim-term_customizer!
   dotenv-rails
@@ -871,11 +947,14 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
+  omniauth-oauth2
+  omniauth_openid_connect
   passenger
   puma (~> 4.3)
   ruby-progressbar
   sendgrid-ruby
   sentry-rails
+  sentry-raven
   sentry-ruby
   sentry-sidekiq
   sidekiq
@@ -890,4 +969,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   2.1.4
+   2.2.11
