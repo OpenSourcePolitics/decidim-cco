@@ -79,29 +79,6 @@ describe "Authentication", type: :system do
         expect(page).not_to have_content("You have signed up successfully")
       end
     end
-
-    context "when using facebook" do
-      let(:omniauth_hash) do
-        OmniAuth::AuthHash.new(
-          provider: "facebook",
-          uid: "123545",
-          info: {
-            email: "user@from-facebook.com",
-            name: "Facebook User"
-          }
-        )
-      end
-
-      before do
-        OmniAuth.config.test_mode = true
-        OmniAuth.config.mock_auth[:facebook] = omniauth_hash
-      end
-
-      after do
-        OmniAuth.config.test_mode = false
-        OmniAuth.config.mock_auth[:facebook] = nil
-      end
-    end
   end
 
   describe "Confirm email" do
@@ -245,33 +222,6 @@ describe "Authentication", type: :system do
     end
   end
 
-  context "when a user is already registered with a social provider" do
-    let(:user) { create(:user, :confirmed, organization: organization) }
-    let(:identity) { create(:identity, user: user, provider: "facebook", uid: "12345") }
-
-    let(:omniauth_hash) do
-      OmniAuth::AuthHash.new(
-        provider: identity.provider,
-        uid: identity.uid,
-        info: {
-          email: user.email,
-          name: "Facebook User",
-          verified: true
-        }
-      )
-    end
-
-    before do
-      OmniAuth.config.test_mode = true
-      OmniAuth.config.mock_auth[:facebook] = omniauth_hash
-    end
-
-    after do
-      OmniAuth.config.test_mode = false
-      OmniAuth.config.mock_auth[:facebook] = nil
-    end
-  end
-
   context "when a user is already registered in another organization with the same email" do
     let(:user) { create(:user, :confirmed, password: "DfyvHn425mYAy2HL") }
 
@@ -295,33 +245,6 @@ describe "Authentication", type: :system do
           expect(page).to have_content("A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.")
         end
       end
-    end
-  end
-
-  context "when a user is already registered in another organization with the same fb account" do
-    let(:user) { create(:user, :confirmed) }
-    let(:identity) { create(:identity, user: user, provider: "facebook", uid: "12345") }
-
-    let(:omniauth_hash) do
-      OmniAuth::AuthHash.new(
-        provider: identity.provider,
-        uid: identity.uid,
-        info: {
-          email: user.email,
-          name: "Facebook User",
-          verified: true
-        }
-      )
-    end
-
-    before do
-      OmniAuth.config.test_mode = true
-      OmniAuth.config.mock_auth[:facebook] = omniauth_hash
-    end
-
-    after do
-      OmniAuth.config.test_mode = false
-      OmniAuth.config.mock_auth[:facebook] = nil
     end
   end
 end

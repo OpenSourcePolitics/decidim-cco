@@ -80,5 +80,5 @@ class MoveUsersGroupsToUsersTable < ActiveRecord::Migration[5.2]
     end
 
     drop_table :decidim_user_groups
-end
   end
+end

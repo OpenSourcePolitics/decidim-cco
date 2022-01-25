@@ -50,4 +50,4 @@ class MigrateOldResults < ActiveRecord::Migration[5.1]
 
     drop_table :decidim_results_results
   end
-  end
+end

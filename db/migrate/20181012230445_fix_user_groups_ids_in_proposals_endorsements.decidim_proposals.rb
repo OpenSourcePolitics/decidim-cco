@@ -13,4 +13,4 @@ class FixUserGroupsIdsInProposalsEndorsements < ActiveRecord::Migration[5.2]
         .update_all(decidim_user_group_id: group.id)
     end
   end
-  end
+end

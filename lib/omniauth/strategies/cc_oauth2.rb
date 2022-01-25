@@ -126,6 +126,7 @@ module OmniAuth
 
       protected
 
+      # rubocop:disable Style/GuardClause
       def build_access_token
         verifier = request.params["code"]
         client.auth_code.get_token(verifier, { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
@@ -144,6 +145,7 @@ module OmniAuth
         end
         hash
       end
+      # rubocop:enable Style/GuardClause
 
       def options_for(option)
         hash = {}
@@ -152,7 +154,7 @@ module OmniAuth
                                options[key].call(env)
                              else
                                options[key]
-          end
+                             end
         end
         hash
       end

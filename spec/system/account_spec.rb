@@ -132,11 +132,5 @@ describe "Account", type: :system do
         end
       end
     end
-
-    context "when on the delete my account page" do
-      before do
-        visit decidim.delete_account_path
-      end
-    end
   end
 end
