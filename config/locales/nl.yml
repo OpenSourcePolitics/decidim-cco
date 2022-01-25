@@ -1,12 +1,95 @@
+---
 nl:
   activemodel:
+    attributes:
+      osp_authorization_handler:
+        birthday: Birthday
+        document_number: Unique number
+        postal_code: Postal code
+      participatory_process:
+        private_space: Private space
     models:
       decidim/budgets/decidim_events_budgets_reminder_order: Reminder order event
   decidim:
+    accessibility:
+      skip_button: Skip button
+    admin:
+      participatory_space_private_users:
+        create:
+          error: Error
+          success: Success
+    amendments:
+      emendation:
+        announcement:
+          evaluating: |-
+            This amendment for %{amendable_type} %{proposal_link}
+            is in evaluation state.
+    authorization_handlers:
+      osp_authorization_handler:
+        explanation: Verify your identity by entering a unique number
+        fields:
+          birthday: Birthday
+          document_number: Unique number
+          postal_code: Postal code
+        name: Identity Verification Form
+      osp_authorization_workflow:
+        name: Authorization procedure
     events:
       budgets:
+        pending_order:
+          email_intro: The vote on budget "%{resource_title}" is not confirmed yet in "%{participatory_space_title}".
+          email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
+          email_subject: Your vote is still pending in %{participatory_space_title}
+          notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
         reminder_order:
           email_intro: 'A vote is still pending! You can always continue by clicking here: <a href=''%{resource_url}''>%{participatory_space_title}</a>'
           email_outro: Bedankt voor je bijdrage
           email_subject: A vote is still pending on %{participatory_space_title} notification
           notification_title: 'A vote is still pending! You can always continue by clicking here: <a href=''%{resource_url}''>%{participatory_space_title}</a>'
+    meetings:
+      directory:
+        meetings:
+          index:
+            all: All
+      meeting:
+        not_allowed: You are not allowed to view this meeting
+      meetings:
+        create:
+          invalid: There was a problem creating this meeting.
+          success: You have created the meeting successfully.
+        update:
+          invalid: There was a problem updating the meeting.
+          success: You have updated the meeting successfully.
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Verify with the identity verification form
+            osp_authorization_workflow: Verify with the identity verification form
+  devise:
+    mailer:
+      invitation_instructions:
+        accept: Accept
+        accept_until: Accept until
+        hello: Hello
+        ignore: Ignore
+        invited_you_as_private_user: Invited you as private user
+        someone_invited_you_as_private_user: Someone invited you as private user
+  layouts:
+    decidim:
+      footer:
+        download_open_data: Open data
+        made_with_open_source: Website made by <a target="_blank" href="https://opensourcepolitics.eu/en/">Open Source Politics</a> with the <a target="_blank" href="https://github.com/decidim/decidim">decidim free software</a>.
+      header:
+        close_menu: Close menu
+        navigation: Navigation
+        sign_in: Sign in
+        sign_up: Sign up
+      user_menu:
+        account: Account
+        admin_dashboard: Admin dashboard
+        conversations: Conversations
+        notifications: Notifications
+        profile: Profile
+        public_profile: Public profile
+        sign_out: Sign out
