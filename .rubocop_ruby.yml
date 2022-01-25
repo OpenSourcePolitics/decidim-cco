@@ -1165,6 +1165,8 @@ Layout/DefEndAlignment:
   # keyword on the same line.
   EnforcedStyleAlignWith: start_of_line
   AutoCorrect: false
+  Exclude:
+    - "db/migrate/*"
 
 Lint/InheritException:
   # The default base class in favour of `Exception`.
@@ -1174,7 +1176,7 @@ Lint/InheritException:
     - standard_error
 
 Layout/LineLength:
-  Max: 180
+  Max: 200
   # To make it possible to copy or click on URIs in the code, we allow lines
   # containing a URI to be longer than Max.
   AllowHeredoc: true

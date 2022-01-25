@@ -8,8 +8,6 @@ fr:
         postal_code: Code postal
       participatory_process:
         private_space: Espace privé
-    models:
-      decidim/budgets/decidim_events_budgets_reminder_order: Reminder order event
   decidim:
     accessibility:
       skip_button: Passer au contenu principal
@@ -41,11 +39,6 @@ fr:
           email_outro: Vous avez reçu cette notification parce que vous avez commencé à voter sur la concertation "%{participatory_space_title}"
           email_subject: Votre vote est toujours en attente sur la concertation %{participatory_space_title}
           notification_title: Votre vote pour le budget <a href="%{resource_path}">%{resource_title}</a> attend d'être finalisé sur la concertation %{participatory_space_title}
-        reminder_order:
-          email_intro: 'A vote is still pending! You can always continue by clicking here: <a href=''%{resource_url}''>%{participatory_space_title}</a>'
-          email_outro: Bedankt voor je bijdrage
-          email_subject: A vote is still pending on %{participatory_space_title} notification
-          notification_title: 'A vote is still pending! You can always continue by clicking here: <a href=''%{resource_url}''>%{participatory_space_title}</a>'
     meetings:
       directory:
         meetings:
