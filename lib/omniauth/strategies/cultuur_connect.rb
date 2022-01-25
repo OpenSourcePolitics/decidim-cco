@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'oauth2'
-require 'omniauth'
-require 'securerandom'
-require 'socket'
-require 'timeout'
-require 'forwardable'
-require 'open-uri'
+require "oauth2"
+require "omniauth"
+require "securerandom"
+require "socket"
+require "timeout"
+require "forwardable"
+require "open-uri"
 
 module OmniAuth
   module Strategies
@@ -18,7 +18,7 @@ module OmniAuth
 
       def_delegator :request, :params
 
-      args %i[client_id client_secret site]
+      args [:client_id, :client_secret, :site]
 
       option :name, :cultuur_connect
 
@@ -26,12 +26,12 @@ module OmniAuth
       option :client_secret, nil
       option :site, nil
       option :client_options,
-             authorize_url: '/idp/rest/auth',
-             token_url: '/idp/rest/auth/token',
-             logout_url: '/idp/rest/auth/logout'
+             authorize_url: "/idp/rest/auth",
+             token_url: "/idp/rest/auth/token",
+             logout_url: "/idp/rest/auth/logout"
       option :issuer, nil
       option :authorize_params, {}
-      option :authorize_options, %i[scope state]
+      option :authorize_options, [:scope, :state]
       option :token_params, {}
       option :token_options, []
       option :auth_token_params, {}
@@ -56,25 +56,24 @@ module OmniAuth
 
       def authorize_params
         options.authorize_params[:state] = SecureRandom.hex(24)
-        params = options.authorize_params.merge(options_for('authorize'))
+        params = options.authorize_params.merge(options_for("authorize"))
         if OmniAuth.config.test_mode
           @env ||= {}
-          @env['rack.session'] ||= {}
+          @env["rack.session"] ||= {}
         end
-        session['omniauth.state'] = params[:state]
+        session["omniauth.state"] = params[:state]
         params
       end
 
       def token_params
-        options.token_params.merge(options_for('token'))
+        options.token_params.merge(options_for("token"))
       end
 
-      def callback_phase # rubocop:disable AbcSize, CyclomaticComplexity, MethodLength, PerceivedComplexity
-        error = request.params['error_reason'] || request.params['error']
+      def callback_phase(error = request.params["error_reason"] || request.params["error"])
         if error
-          fail!(error, CallbackError.new(request.params['error'], request.params['error_description'] || request.params['error_reason'], request.params['error_uri']))
-        elsif !options.provider_ignores_state && (request.params['state'].to_s.empty? || request.params['state'] != session.delete('omniauth.state'))
-          fail!(:csrf_detected, CallbackError.new(:csrf_detected, 'CSRF detected'))
+          fail!(error, CallbackError.new(request.params["error"], request.params["error_description"] || request.params["error_reason"], request.params["error_uri"]))
+        elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
+          fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
         else
           self.access_token = build_access_token
           # self.access_token = access_token.refresh! if access_token.expired?
@@ -103,17 +102,17 @@ module OmniAuth
       end
 
       uid do
-        raw_info.dig('sub')
+        raw_info["sub"]
       end
 
       info do
         Rails.logger.debug raw_info.inspect
         {
           name: find_name,
-          email: raw_info.dig('email'),
+          email: raw_info["email"],
           nickname: find_nickname,
-          firstname: raw_info.dig('firstname'),
-          surname: raw_info.dig('surname')
+          firstname: raw_info["firstname"],
+          surname: raw_info["surname"]
         }
       end
 
@@ -122,7 +121,7 @@ module OmniAuth
       end
 
       def find_name
-        "#{raw_info.dig('firstname')} #{raw_info.dig('surname')} #{raw_info.dig('familyname')}".strip
+        "#{raw_info["firstname"]} #{raw_info["surname"]} #{raw_info["familyname"]}".strip
       end
 
       def find_nickname
@@ -136,11 +135,11 @@ module OmniAuth
       protected
 
       def build_access_token
-        verifier = request.params['code']
+        verifier = request.params["code"]
         @build_access_token ||= client.auth_code.get_token(verifier, { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
       rescue ::OAuth2::Error => e
         if e.try(:response).try(:parsed)
-          @build_access_token ||= (::JWT.decode e.response.parsed['idToken'], nil, false)[0]
+          @build_access_token ||= (::JWT.decode e.response.parsed["idToken"], nil, false)[0]
         else
           raise e
         end
@@ -172,7 +171,7 @@ module OmniAuth
 
       def encoded_post_logout_redirect_uri
         URI.encode_www_form(
-          redirect: (full_host + logout_path + '/callback')
+          redirect: "#{full_host}#{logout_path}/callback"
         )
       end
 
@@ -196,7 +195,7 @@ module OmniAuth
         end
 
         def message
-          [error, error_reason, error_uri].compact.join(' | ')
+          [error, error_reason, error_uri].compact.join(" | ")
         end
       end
     end

@@ -3,8 +3,8 @@
 require "oauth2"
 require "omniauth"
 require "securerandom"
-require "socket"       # for SocketError
-require "timeout"      # for Timeout::Error
+require "socket" # for SocketError
+require "timeout" # for Timeout::Error
 
 # require "omniauth-saml"
 # require "omniauth_openid_connect"
@@ -24,15 +24,15 @@ module OmniAuth
         OmniAuth::Strategy.included(subclass)
       end
 
-      args %i[client_id client_secret site]
+      args [:client_id, :client_secret, :site]
 
       option :name, :cultuur_connect
 
       option :client_id, nil
       option :client_secret, nil
       option :client_options, {
-        authorize_url: '/idp/rest/auth',
-        token_url: '/idp/rest/auth/token'
+        authorize_url: "/idp/rest/auth",
+        token_url: "/idp/rest/auth/token"
       }
       option :authorize_params, {}
       option :authorize_options, [:scope, :state]
@@ -61,7 +61,7 @@ module OmniAuth
       end
 
       def request_phase
-        redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(authorize_params))
+        redirect client.auth_code.authorize_url({ redirect_uri: callback_url }.merge(authorize_params))
       end
 
       def authorize_params
@@ -79,8 +79,7 @@ module OmniAuth
         options.token_params.merge(options_for("token"))
       end
 
-      def callback_phase # rubocop:disable AbcSize, CyclomaticComplexity, MethodLength, PerceivedComplexity
-        error = request.params["error_reason"] || request.params["error"]
+      def callback_phase(error = request.params["error_reason"] || request.params["error"])
         if error
           fail!(error, CallbackError.new(request.params["error"], request.params["error_description"] || request.params["error_reason"], request.params["error_uri"]))
         elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
@@ -99,17 +98,17 @@ module OmniAuth
       end
 
       uid do
-        raw_info.dig("sub")
+        raw_info["sub"]
       end
 
       info do
         Rails.logger.debug raw_info.inspect
         {
           name: find_name,
-          email: raw_info.dig("email"),
+          email: raw_info["email"],
           nickname: find_nickname,
-          firstname: raw_info.dig("firstname"),
-          surname: raw_info.dig("surname")
+          firstname: raw_info["firstname"],
+          surname: raw_info["surname"]
         }
       end
 
@@ -118,18 +117,18 @@ module OmniAuth
       end
 
       def find_name
-        "#{raw_info.dig("firstname")} #{raw_info.dig("surname")} #{raw_info.dig("familyname")}".strip
+        "#{raw_info["firstname"]} #{raw_info["surname"]} #{raw_info["familyname"]}".strip
       end
 
       def find_nickname
         ::Decidim::UserBaseEntity.nicknamize(find_name)
       end
 
-    protected
+      protected
 
       def build_access_token
         verifier = request.params["code"]
-        client.auth_code.get_token(verifier, {:redirect_uri => callback_url}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
+        client.auth_code.get_token(verifier, { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
       rescue ::OAuth2::Error => e
         if e.try(:response).try(:parsed)
           (::JWT.decode e.response.parsed["idToken"], nil, false)[0]
@@ -150,9 +149,9 @@ module OmniAuth
         hash = {}
         options.send(:"#{option}_options").select { |key| options[key] }.each do |key|
           hash[key.to_sym] = if options[key].respond_to?(:call)
-            options[key].call(env)
-          else
-            options[key]
+                               options[key].call(env)
+                             else
+                               options[key]
           end
         end
         hash
