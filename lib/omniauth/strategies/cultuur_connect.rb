@@ -69,7 +69,7 @@ module OmniAuth
         options.token_params.merge(options_for("token"))
       end
 
-      def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+      def callback_phase
         error = request.params["error_reason"] || request.params["error"]
         if !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
           fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
