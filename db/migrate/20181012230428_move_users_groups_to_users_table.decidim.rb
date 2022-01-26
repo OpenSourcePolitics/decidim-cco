@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20181001124950)
 
 class MoveUsersGroupsToUsersTable < ActiveRecord::Migration[5.2]
@@ -28,7 +29,6 @@ class MoveUsersGroupsToUsersTable < ActiveRecord::Migration[5.2]
     self.table_name = "decidim_coauthorships"
   end
 
-  # rubocop:disable Rails/SkipsModelValidations
   def change
     add_column :decidim_users, :type, :string
     User.update_all(type: "Decidim::User")
@@ -81,5 +81,4 @@ class MoveUsersGroupsToUsersTable < ActiveRecord::Migration[5.2]
 
     drop_table :decidim_user_groups
   end
-  # rubocop:enable Rails/SkipsModelValidations
 end
