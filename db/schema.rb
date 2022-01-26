@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.string "facebook_handler"
     t.string "youtube_handler"
     t.string "github_handler"
+    t.string "hostname"
     t.bigint "decidim_assemblies_type_id"
     t.integer "weight", default: 1, null: false
     t.integer "follows_count", default: 0, null: false
@@ -177,6 +178,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.index ["decidim_organization_id", "slug"], name: "index_unique_assembly_slug_and_organization", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_assemblies_on_decidim_organization_id"
     t.index ["decidim_scope_id"], name: "index_decidim_assemblies_on_decidim_scope_id"
+    t.index ["hostname"], name: "index_decidim_assemblies_on_hostname", unique: true
     t.index ["parent_id"], name: "decidim_assemblies_assemblies_on_parent_id"
   end
 
@@ -421,7 +423,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
   end
 
   create_table "decidim_comments_comments", id: :serial, force: :cascade do |t|
-    t.string "decidim_commentable_type", null: false
+    t.string "decidim_commentable_type"
     t.integer "decidim_commentable_id", null: false
     t.integer "decidim_author_id", null: false
     t.datetime "created_at", null: false
@@ -1072,12 +1074,12 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.string "decidim_author_type"
     t.integer "decidim_user_group_id"
     t.integer "comments_count", default: 0, null: false
+    t.string "salt"
     t.string "online_meeting_url"
     t.string "type_of_meeting", default: "in_person"
     t.string "registration_type", default: "registration_disabled", null: false
     t.string "registration_url"
     t.integer "follows_count", default: 0, null: false
-    t.string "salt"
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_meetings_meetings_on_author"
     t.index ["decidim_author_id"], name: "index_decidim_meetings_meetings_on_decidim_author_id"
     t.index ["decidim_component_id"], name: "index_decidim_meetings_meetings_on_decidim_component_id"
@@ -1174,7 +1176,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
 
   create_table "decidim_moderations", id: :serial, force: :cascade do |t|
     t.integer "decidim_participatory_space_id", null: false
-    t.string "decidim_reportable_type", null: false
+    t.string "decidim_reportable_type"
     t.integer "decidim_reportable_id", null: false
     t.integer "report_count", default: 0, null: false
     t.datetime "hidden_at"
@@ -1332,6 +1334,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: false
     t.integer "position"
+    t.jsonb "action_btn_text"
     t.jsonb "cta_text", default: {}
     t.string "cta_path"
     t.index ["decidim_participatory_process_id", "active"], name: "unique_index_to_avoid_duplicate_active_steps", unique: true, where: "(active = true)"
@@ -1495,8 +1498,8 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
-    t.datetime "published_at"
     t.integer "proposal_notes_count", default: 0, null: false
+    t.datetime "published_at"
     t.integer "coauthorships_count", default: 0, null: false
     t.integer "position"
     t.string "participatory_text_level"
@@ -1544,9 +1547,9 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
   end
 
   create_table "decidim_resource_links", id: :serial, force: :cascade do |t|
-    t.string "from_type", null: false
+    t.string "from_type"
     t.integer "from_id", null: false
-    t.string "to_type", null: false
+    t.string "to_type"
     t.integer "to_id", null: false
     t.string "name", null: false
     t.jsonb "data"
@@ -1740,6 +1743,20 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.index ["role", "decidim_user_group_id"], name: "decidim_group_membership_one_creator_per_group", unique: true, where: "((role)::text = 'creator'::text)"
   end
 
+  create_table "decidim_user_groups", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "document_number", null: false
+    t.string "phone", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "avatar"
+    t.datetime "verified_at"
+    t.datetime "rejected_at"
+    t.integer "decidim_organization_id", null: false
+    t.index ["decidim_organization_id", "document_number"], name: "index_decidim_user_groups_document_number_on_organization_id", unique: true
+    t.index ["decidim_organization_id", "name"], name: "index_decidim_user_groups_names_on_organization_id", unique: true
+  end
+
   create_table "decidim_user_moderations", force: :cascade do |t|
     t.bigint "decidim_user_id"
     t.integer "report_count", default: 0, null: false
@@ -1795,9 +1812,9 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.string "nickname", limit: 20, default: "", null: false
     t.string "personal_url"
     t.text "about"
-    t.datetime "accepted_tos_version"
     t.datetime "officialized_at"
     t.jsonb "officialized_as"
+    t.datetime "accepted_tos_version"
     t.string "newsletter_token", default: ""
     t.datetime "newsletter_notifications_at"
     t.string "type", null: false
