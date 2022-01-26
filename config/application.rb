@@ -1,6 +1,8 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'rails/all'
+require_relative "boot"
+
+require "rails/all"
 
 # TODO : add missing dep to decidim-initiatives/lib/decidim/initiatives/engine.rb
 # require "wicked_pdf"
@@ -15,11 +17,13 @@ module DecidimApp
     config.load_defaults 5.1
     config.time_zone = "Europe/Brussels"
 
-    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
 
     # This needs to be set for correct images URLs in emails
     # DON'T FORGET to ALSO set this in `config/initializers/carrierwave.rb`
     # config.action_mailer.asset_host = "https://your.server.url"
+
+    config.backup = config_for(:backup).deep_symbolize_keys
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
