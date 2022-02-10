@@ -12,6 +12,8 @@ nl:
     accessibility:
       skip_button: Skip button
     admin:
+      titles:
+        panel: Panel
       participatory_space_private_users:
         create:
           error: Error
@@ -53,6 +55,11 @@ nl:
         update:
           invalid: There was a problem updating the meeting.
           success: You have updated the meeting successfully.
+    system:
+      organizations:
+        smtp_settings:
+          placeholder:
+            from_email: email
     verifications:
       authorizations:
         first_login:
@@ -76,13 +83,13 @@ nl:
       header:
         close_menu: Close menu
         navigation: Navigation
-        sign_in: Sign in
+        sign_in: Aanmelden
         sign_up: Sign up
       user_menu:
         account: Account
         admin_dashboard: Admin dashboard
         conversations: Conversations
-        notifications: Notifications
+        notifications: Meldingen
         profile: Profile
         public_profile: Public profile
-        sign_out: Sign out
+        sign_out: Afmelden
