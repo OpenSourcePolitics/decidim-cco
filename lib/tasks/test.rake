@@ -3,6 +3,7 @@
 namespace :test do
   desc "Setup tests environment"
   task setup: :environment do
+    system("rails db:environment:set RAILS_ENV=test")
     system("rake db:drop RAILS_ENV=test")
     system("rake db:create RAILS_ENV=test")
     system("rake db:migrate RAILS_ENV=test")
