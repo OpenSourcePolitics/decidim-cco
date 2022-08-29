@@ -13,9 +13,8 @@ AllCops:
     - "**/Gemfile"
     - "**/Rakefile"
   Exclude:
-    - "**/vendor/**/*"
+    - "vendor/**/*"
     - "node_modules/**/*"
-    - "bin/**/*"
     - "db/schema.rb"
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
@@ -73,6 +72,10 @@ AllCops:
     Patterns:
       - "(?:^|/)spec/"
       - "(?:^|/)test/"
+
+Lint/SafeNavigationChain:
+  Exclude:
+    - lib/tasks/migrate.rake
 
 # Indent private/protected/public as deep as method definitions
 Layout/AccessModifierIndentation:
@@ -175,6 +178,15 @@ Layout/ParameterAlignment:
   # By default, the indentation width from Style/IndentationWidth is used
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
+
+Style/ArrayCoercion:
+  Description: >-
+    Use Array() instead of explicit Array check or [*var], when dealing
+    with a variable you want to treat as an Array, but you're not certain it's an array.
+  StyleGuide: '#array-coercion'
+  Safe: false
+  Enabled: false
+  VersionAdded: '0.88'
 
 Style/AndOr:
   # Whether `and` and `or` are banned only in conditionals (conditionals)
@@ -389,6 +401,10 @@ Style/Copyright:
 
 Style/DocumentationMethod:
   RequireForNonPublicMethods: false
+
+Style/MixinUsage:
+  Exclude:
+    - "bin/*"
 
 # Multi-line method chaining should be done with leading dots.
 Layout/DotPosition:
@@ -1059,6 +1075,10 @@ Naming/VariableNumber:
     - snake_case
     - normalcase
     - non_integer
+  Exclude:
+    - "**/*/dummy_authorization_handler.rb"
+    - "app/controllers/decidim/proposals/proposals_controller.rb"
+    - "spec/system/homepage_spec.rb"
 
 # WordArray enforces how array literals of word-like strings should be expressed.
 Style/WordArray:
@@ -1074,6 +1094,10 @@ Style/WordArray:
   MinSize: 2
   # The regular expression WordRegex decides what is considered a word.
   WordRegex: !ruby/regexp '/\A[\p{Word}\n\t]+\z/'
+
+Style/MutableConstant:
+  Exclude:
+    - "bin/overloads"
 
 ##################### Metrics ##################################
 
@@ -1165,8 +1189,6 @@ Layout/DefEndAlignment:
   # keyword on the same line.
   EnforcedStyleAlignWith: start_of_line
   AutoCorrect: false
-  Exclude:
-    - "db/migrate/*"
 
 Lint/InheritException:
   # The default base class in favour of `Exception`.
@@ -1176,7 +1198,7 @@ Lint/InheritException:
     - standard_error
 
 Layout/LineLength:
-  Max: 200
+  Max: 180
   # To make it possible to copy or click on URIs in the code, we allow lines
   # containing a URI to be longer than Max.
   AllowHeredoc: true
@@ -1185,8 +1207,8 @@ Layout/LineLength:
     - http
     - https
   Exclude:
-    - "**/spec/**/*"
-    - "db/**/*"
+    - "spec/**/*"
+    - "db/schema.rb"
 
 # Checks for unused block arguments
 Lint/UnusedBlockArgument:
@@ -1217,13 +1239,10 @@ RSpec/ContextWording:
 RSpec/DescribeClass:
   Exclude:
     - spec/gemfiles_spec.rb
-    - spec/js_bundles_spec.rb
+    - spec/webpacker_spec.rb
     - spec/i18n_spec.rb
     - "**/*/spec/**/*_badge_spec.rb"
     - "**/tasks/**/*"
-
-RSpec/EmptyExampleGroup:
-  Enabled: true
 
 RSpec/ExampleLength:
   Max: 49
@@ -1242,9 +1261,6 @@ RSpec/MessageSpies:
 
 RSpec/MultipleExpectations:
   Enabled: false
-
-RSpec/MultipleMemoizedHelpers:
-  Max: 35
 
 RSpec/NestedGroups:
   Max: 7
