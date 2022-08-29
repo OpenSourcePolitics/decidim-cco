@@ -10,5 +10,5 @@ class AddCommentableCounterCacheToDebates < ActiveRecord::Migration[5.2]
     Decidim::Debates::Debate.includes(:comments).find_each do |debate|
       debate.update_columns(comments_count: debate.comments.not_hidden.count)
     end
-      end
+  end
 end
