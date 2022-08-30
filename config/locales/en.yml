@@ -92,6 +92,7 @@ en:
         navigation: Navigation
         sign_in: Sign in
         sign_up: Sign up
+        user_menu: User menu
       user_menu:
         account: Account
         admin_dashboard: Admin dashboard

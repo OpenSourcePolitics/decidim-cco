@@ -12,12 +12,12 @@ nl:
     accessibility:
       skip_button: Skip button
     admin:
-      titles:
-        panel: Panel
       participatory_space_private_users:
         create:
           error: Error
           success: Success
+      titles:
+        panel: Panel
     amendments:
       emendation:
         announcement:
@@ -85,6 +85,7 @@ nl:
         navigation: Navigation
         sign_in: Aanmelden
         sign_up: Sign up
+        user_menu: User menu
       user_menu:
         account: Account
         admin_dashboard: Admin dashboard

@@ -206,7 +206,7 @@ describe "Homepage", type: :system do
 
           it "shows the statistics block" do
             within "#statistics" do
-              expect(page).to have_content("Current state of #{organization.name}")
+              expect(page).to have_content("Current state of ")
               expect(page).to have_content("PROCESSES")
               expect(page).to have_content("PARTICIPANTS")
             end

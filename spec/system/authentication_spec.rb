@@ -144,7 +144,7 @@ describe "Authentication", type: :system do
           perform_enqueued_jobs { find("*[type=submit]").click }
         end
 
-        expect(page).to have_content("reset your password")
+        expect(page).to have_content("If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.")
         expect(emails.count).to eq(1)
       end
     end
@@ -201,7 +201,7 @@ describe "Authentication", type: :system do
             perform_enqueued_jobs { find("*[type=submit]").click }
           end
 
-          expect(page).to have_content("You will receive an email with instructions for how to unlock your account in a few minutes.")
+          expect(page).to have_content("If your account exists, you will receive an email with instructions for how to unlock it in a few minutes.")
           expect(emails.count).to eq(1)
         end
       end
