@@ -2773,7 +2773,7 @@
   dependencies:
     "typo-js" "*"
 
-"codemirror@^5.33.0", "codemirror@^5.65.3":
+"codemirror@^5.33.0", "codemirror@^5.65.3", "codemirror@^5.65.8":
   "integrity" "sha512-TNGkSkkoAsmZSf6W6g35LMVQJBHKasc2CKwhr/fTxSYun7cn6J+CbtyNjV/MYlFVkNTsqZoviegyCZimWhoMMA=="
   "resolved" "https://registry.npmjs.org/codemirror/-/codemirror-5.65.8.tgz"
   "version" "5.65.8"
@@ -4718,7 +4718,7 @@
   "resolved" "https://registry.npmjs.org/hex-color-regex/-/hex-color-regex-1.1.0.tgz"
   "version" "1.1.0"
 
-"highlight.js@^11.5.1":
+"highlight.js@^11.6.0":
   "integrity" "sha512-ig1eqDzJaB0pqEvlPVIpSSyMaO92bH1N2rJpLMN/nX396wTpDA4Eq0uK+7I/2XG17pFaaKE0kjV/XPeGt7Evjw=="
   "resolved" "https://registry.npmjs.org/highlight.js/-/highlight.js-11.6.0.tgz"
   "version" "11.6.0"
@@ -5353,7 +5353,7 @@
   "resolved" "https://registry.npmjs.org/jquery-ui-sortable/-/jquery-ui-sortable-1.0.0.tgz"
   "version" "1.0.0"
 
-"jquery-ui@^1.13.1":
+"jquery-ui@^1.13.2":
   "integrity" "sha512-wBZPnqWs5GaYJmo1Jj0k/mrSkzdQzKDwhXNtHKcBdAcKVxMM3KNYFq+iJ2i1rwiG53Z8M4mTn3Qxrm17uH1D4Q=="
   "resolved" "https://registry.npmjs.org/jquery-ui/-/jquery-ui-1.13.2.tgz"
   "version" "1.13.2"
