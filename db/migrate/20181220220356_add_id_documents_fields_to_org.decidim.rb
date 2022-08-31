@@ -9,5 +9,5 @@ class AddIdDocumentsFieldsToOrg < ActiveRecord::Migration[5.2]
 
     Decidim::Organization.reset_column_information
     Decidim::Organization.update_all(id_documents_methods: ["online"])
-      end
+  end
 end
