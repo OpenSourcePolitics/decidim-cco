@@ -39,6 +39,7 @@ group :development, :test do
   gem "climate_control", "~> 1.2"
 
   gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+  gem "parallel_tests"
 end
 
 group :development do
