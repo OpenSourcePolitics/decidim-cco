@@ -138,7 +138,12 @@ module OmniAuth
       # rubocop:disable Style/GuardClause
       def build_access_token
         verifier = request.params["code"]
-        @build_access_token ||= client.auth_code.get_token(verifier, { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
+        @build_access_token ||= client.auth_code
+                                      .get_token(
+                                        verifier,
+                                        { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)),
+                                        deep_symbolize(options.auth_token_params)
+                                      )
       rescue ::OAuth2::Error => e
         if e.try(:response).try(:parsed)
           @build_access_token ||= (::JWT.decode e.response.parsed["idToken"], nil, false)[0]
@@ -146,6 +151,7 @@ module OmniAuth
           raise e
         end
       end
+
       # rubocop:enable Style/GuardClause
 
       def deep_symbolize(options)

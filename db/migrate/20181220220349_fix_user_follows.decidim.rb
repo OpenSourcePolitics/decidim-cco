@@ -14,5 +14,5 @@ class FixUserFollows < ActiveRecord::Migration[5.2]
     Follow.where(
       decidim_followable_type: "Decidim::User"
     ).update_all(decidim_followable_type: "Decidim::UserBaseEntity")
-      end
+  end
 end
