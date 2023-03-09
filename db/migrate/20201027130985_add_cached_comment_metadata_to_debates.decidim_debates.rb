@@ -19,5 +19,5 @@ class AddCachedCommentMetadataToDebates < ActiveRecord::Migration[5.2]
         last_comment_by_type: last_comment.decidim_author_type
       )
     end
-      end
+  end
 end

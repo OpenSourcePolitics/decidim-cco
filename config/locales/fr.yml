@@ -92,6 +92,7 @@ fr:
         navigation: Navigation
         sign_in: Se connecter
         sign_up: S'inscrire
+        user_menu: Menu utilisateur
       user_menu:
         account: Mon compte
         admin_dashboard: Admin dashboard

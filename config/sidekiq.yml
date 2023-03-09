@@ -1,12 +1,16 @@
 :concurrency: 5
 :queues:
+  - mailers
   - default
   - backups
-  - metrics
-  - mailers
-  - newsletter
   - events
+  - newsletter
+  - exports
+  - user_report
+  - block_user
+  - translation
   - scheduled
+  - metrics
 
 :schedule:
   CalculateAllMetrics:
@@ -16,10 +20,6 @@
   PreloadOpenData:
     cron: '0 0 1 * * *' # Run at 01:00
     class: PreloadOpenDataJob
-    queue: scheduled
-  OrdersReminder:
-    cron: '0 0 18 * * *' # Run at 18:00
-    class: OrdersReminderJob
     queue: scheduled
   Backup:
     cron: '0 0 4 * * *' # Run at 04:00

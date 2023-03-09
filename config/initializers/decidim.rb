@@ -9,6 +9,9 @@ Decidim.configure do |config|
   config.default_locale = :nl
   config.available_locales = [:en, :fr, :nl]
 
+  # Timeout session
+  config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 180).to_i.minutes
+
   config.maximum_attachment_height_or_width = 6000
 
   # Geocoder configuration
@@ -90,3 +93,6 @@ end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales
 Rails.application.config.i18n.default_locale = Decidim.default_locale
+
+# Inform Decidim about the assets folder
+Decidim.register_assets_path File.expand_path("app/packs", Rails.application.root)

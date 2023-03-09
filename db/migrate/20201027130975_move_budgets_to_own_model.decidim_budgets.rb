@@ -69,12 +69,12 @@ class MoveBudgetsToOwnModel < ActiveRecord::Migration[5.2]
   def add_budget_references_to_projects(resource)
     Project.where(decidim_component_id: resource.decidim_component_id)
            .update_all(decidim_budgets_budget_id: resource.id)
-      end
+  end
 
   def add_budget_reference_to_orders(resource)
     Order.where(decidim_component_id: resource.decidim_component_id)
          .update_all(decidim_budgets_budget_id: resource.id)
-      end
+  end
 
   # down methods
 
@@ -94,10 +94,10 @@ class MoveBudgetsToOwnModel < ActiveRecord::Migration[5.2]
   def add_component_reference_to_orders(resource)
     Order.where(decidim_budgets_budget_id: resource.id)
          .update_all(decidim_component_id: resource.decidim_component_id)
-      end
+  end
 
   def add_component_reference_to_projects(resource)
     Project.where(decidim_budgets_budget_id: resource.id)
            .update_all(decidim_component_id: resource.decidim_component_id)
-      end
+  end
 end
