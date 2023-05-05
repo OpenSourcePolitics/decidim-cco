@@ -104,3 +104,7 @@ ignore_unused:
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
   - layouts.decidim.user_menu.account
+  - decidim.meetings.directory.meetings.index.all
+  - decidim.meetings.meeting.not_allowed
+  - decidim.meetings.meetings.create.*
+  - decidim.meetings.meetings.update.*
