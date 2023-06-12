@@ -1,10 +1,5 @@
 # Overrides
 
-## Fix meetings orders in indexes
-* `app/controllers/decidim/meetings/meetings_controller.rb`
-* `app/controllers/decidim/meetings/directory/meetings_controller.rb`
-##  Fix meetings registration serializer
-* `app/serializers/decidim/meetings/registration_serializer.rb`
 ## Fix UserAnswersSerializer for CSV exports
 * `lib/decidim/forms/user_answers_serializer.rb`
 ## 28c8d74 - Add basic tests to reference package (#1), 2021-07-26
