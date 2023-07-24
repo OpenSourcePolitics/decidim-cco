@@ -31,6 +31,7 @@ gem "omniauth_openid_connect"
 # gem "omniauth-jwt"
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "aws-sdk-s3", require: false
+gem "fog-aws"
 gem "nokogiri", "~> 1.11"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "sys-filesystem"
