@@ -59,15 +59,6 @@ fr:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
-  devise:
-    mailer:
-      invitation_instructions:
-        accept: Accept
-        accept_until: Accept until
-        hello: Hello
-        ignore: Ignore
-        invited_you_as_private_user: Invited you as private user
-        someone_invited_you_as_private_user: Someone invited you as private user
   faker:
     address:
       country_code:
@@ -98,6 +89,12 @@ fr:
         admin_dashboard: Admin dashboard
         conversations: Conversations
         notifications: Notifications
-        profile: Profile
-        public_profile: Public profile
-        sign_out: Sign out
+        profile: Profil
+        public_profile: Profile public
+        sign_out: Déconnexion
+  rack_attack:
+    too_many_requests:
+      message: Il semblerait que vous fassiez trop de requetes sur notre serveur, votre connexion a ete ralentie.
+      time: 'Vous pourrez naviguer de nouveau sur notre plateforme dans :'
+      time_unit: seconds
+      title: Thank you for your participation on %{organization_name}

@@ -2,43 +2,45 @@
 
 source "https://rubygems.org"
 
-DECIDIM_VERSION = "release/0.26-stable"
+DECIDIM_VERSION = "0.26"
+DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable"
 
 ruby RUBY_VERSION
 
-gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+# Many gems depend on environment variables, so we load them as soon as possible
+gem "dotenv-rails", require: "dotenv/rails-now"
 
-gem "decidim-conferences", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
-gem "decidim-consultations", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
-gem "decidim-initiatives", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+gem "decidim", "~> #{DECIDIM_VERSION}.0"
+
+gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
+gem "decidim-consultations", "~> #{DECIDIM_VERSION}.0"
+gem "decidim-initiatives", "~> #{DECIDIM_VERSION}.0"
 
 gem "bootsnap", "~> 1.4"
 gem "decidim-decidim_awesome", "0.8.3"
-gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: DECIDIM_VERSION
+gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker-0.26"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"
 
-gem "dotenv-rails"
-
+gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
+gem "aws-sdk-s3", require: false
 gem "faker", "~> 2.14"
+gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
 gem "letter_opener_web", "~> 1.3"
-gem "puma", "~> 5.0"
-gem "ruby-progressbar"
-# gem "omniauth-saml", "~> 1.10.0"
+gem "nokogiri", "~> 1.11"
 gem "omniauth-oauth2"
 gem "omniauth_openid_connect"
-# gem "omniauth-jwt"
-gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
-gem "fog-aws"
-gem "nokogiri", "~> 1.11"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "puma", "~> 5.0"
+gem "ruby-progressbar"
 gem "sys-filesystem"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
   gem "climate_control", "~> 1.2"
 
-  gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+  gem "decidim-dev", "~> #{DECIDIM_VERSION}.0"
+  gem "parallel_tests"
 end
 
 group :development do
@@ -53,8 +55,6 @@ group :production do
   gem "dalli"
   gem "health_check", "~> 3.1"
   gem "lograge"
-  gem "newrelic_rpm"
-  gem "passenger"
   gem "sendgrid-ruby"
   gem "sentry-rails"
   gem "sentry-ruby"
