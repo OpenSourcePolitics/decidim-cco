@@ -90,6 +90,7 @@ ignore_missing:
  - decidim.proposals.proposals.votes_count.need_more_votes
  - decidim.admin.titles.panel
  - decidim.system.organizations.smtp_settings.placeholder.from_email
+ - devise.mailer.invitation_instructions.*
 
 # Consider these keys used:
 ignore_unused:
