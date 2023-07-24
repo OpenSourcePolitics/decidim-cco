@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "decidim_app/config"
-require "decidim/dev/dummy_translator"
 
 Decidim.configure do |config|
   config.application_name = "OSP Agora"
