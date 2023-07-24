@@ -7,7 +7,6 @@ DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable"
 
 ruby RUBY_VERSION
 
-
 # Many gems depend on environment variables, so we load them as soon as possible
 gem "dotenv-rails", require: "dotenv/rails-now"
 
@@ -22,18 +21,18 @@ gem "decidim-decidim_awesome", "0.8.3"
 gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker-0.26"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"
 
-gem "faker", "~> 2.14"
-gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
-gem "letter_opener_web", "~> 1.3"
-gem "puma", "~> 5.0"
-gem "ruby-progressbar"
-gem "omniauth-oauth2"
-gem "omniauth_openid_connect"
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "aws-sdk-s3", require: false
+gem "faker", "~> 2.14"
 gem "fog-aws"
+gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
+gem "letter_opener_web", "~> 1.3"
 gem "nokogiri", "~> 1.11"
+gem "omniauth-oauth2"
+gem "omniauth_openid_connect"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "puma", "~> 5.0"
+gem "ruby-progressbar"
 gem "sys-filesystem"
 
 group :development, :test do
