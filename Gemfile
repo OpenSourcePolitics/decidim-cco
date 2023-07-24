@@ -6,6 +6,9 @@ DECIDIM_VERSION = "release/0.26-stable"
 
 ruby RUBY_VERSION
 
+# Many gems depend on environment variables, so we load them as soon as possible
+gem "dotenv-rails", require: "dotenv/rails-now"
+
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
 
 gem "decidim-conferences", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
@@ -17,8 +20,6 @@ gem "decidim-decidim_awesome", "0.8.3"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: DECIDIM_VERSION
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"
 
-gem "dotenv-rails"
-
 gem "faker", "~> 2.14"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
 gem "letter_opener_web", "~> 1.3"
@@ -29,7 +30,7 @@ gem "omniauth-oauth2"
 gem "omniauth_openid_connect"
 # gem "omniauth-jwt"
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
-gem "fog-aws"
+gem "aws-sdk-s3", require: false
 gem "nokogiri", "~> 1.11"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "sys-filesystem"
@@ -54,8 +55,6 @@ group :production do
   gem "dalli"
   gem "health_check", "~> 3.1"
   gem "lograge"
-  gem "newrelic_rpm"
-  gem "passenger"
   gem "sendgrid-ruby"
   gem "sentry-rails"
   gem "sentry-ruby"

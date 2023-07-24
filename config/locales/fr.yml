@@ -14,21 +14,12 @@ fr:
         create:
           error: Erreur
           success: Succès
-      reminders:
-        create:
-          error: Il y a eu un problème en créant le rappel.
-          success:
-            one: "%{count} utilisateur recevra le rappel"
-            other: "%{count} utilisateurs recevront le rappel"
-        new:
-          submit: Send
     amendments:
       emendation:
         announcement:
           evaluating: |-
             Cet amendement pour le %{amendable_type} %{proposal_link}
             est en cours d’évaluation.
-    anonymous_user: Utilisateur anonyme
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
@@ -122,14 +113,6 @@ fr:
         update:
           invalid: Il y a eu une erreur lors de la mise à jour de la rencontre.
           success: La rencontre a été mise à jour avec succès.
-    omniauth:
-      france_connect:
-        explanation: FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.
-        external:
-          link: https://franceconnect.gouv.fr/
-          text: Qu'est-ce-que FranceConnect ?
-        forgot_password:
-          ok_text: Attention, ce mot de passe est celui de votre compte local et en aucun cas celui du compte que vous utilisez au travers de FranceConnect. Il vous servira uniquement lorsque vous vous connecterez avec votre adresse mail plutôt que via FranceConnect.
     proposals:
       collaborative_drafts:
         collaborative_draft:
@@ -217,18 +200,6 @@ fr:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
-  devise:
-    passwords:
-      new:
-        forgot_your_password: Mot de passe oublié ?
-        send_me_reset_password_instructions: Envoyez-moi les instructions de réinitialisation du mot de passe
-    sessions:
-      new:
-        sign_in: S'identifier
-    shared:
-      links:
-        forgot_your_password: Mot de passe oublié ?
-        sign_in_with_france_connect: FranceConnect
   faker:
     address:
       country_code:
