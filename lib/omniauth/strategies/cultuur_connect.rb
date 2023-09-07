@@ -117,8 +117,14 @@ module OmniAuth
         }
       end
 
+      extra do
+        {
+          "raw_info" => raw_info
+        }
+      end
+
       def raw_info
-        @raw_info ||= access_token
+        @raw_info ||= ::JWT.decode(access_token.token, nil, false)[0]
       end
 
       def find_name
@@ -141,7 +147,11 @@ module OmniAuth
         @build_access_token ||= client.auth_code
                                       .get_token(
                                         verifier,
-                                        { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)),
+                                        {
+                                          redirect_uri: callback_url,
+                                          client_id: options.client_id,
+                                          client_secret: options.client_secret
+                                        }.merge(token_params.to_hash(symbolize_keys: true)),
                                         deep_symbolize(options.auth_token_params)
                                       )
       rescue ::OAuth2::Error => e
