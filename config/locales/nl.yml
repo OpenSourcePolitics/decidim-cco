@@ -10,8 +10,39 @@ nl:
         private_space: Private space
   decidim:
     accessibility:
+      front_page_link: Front page
       skip_button: Skip button
     admin:
+      filters:
+        proposals:
+          category_id_eq:
+            label: Category
+          is_emendation_true:
+            label: Type
+            values:
+              'false': Proposals
+              'true': Amendments
+          scope_id_eq:
+            label: Scope
+          state_eq:
+            label: State
+            values:
+              accepted: Accepted
+              evaluating: Evaluating
+              published: Published
+              rejected: Rejected
+              validating: Technical validation
+              withdrawn: Withdrawn
+          state_null:
+            label: State
+            values:
+              'true': Not answered
+          valuator_role_ids_has:
+            label: Assigned to valuator
+        search_placeholder:
+          id_string_or_title_cont: Search %{collection} by ID or title.
+      imports:
+        notice: "%{count} %{resource_name} succesvol geïmporteerd"
       participatory_space_private_users:
         create:
           error: Error
@@ -77,6 +108,10 @@ nl:
         someone_invited_you_as_private_user: Someone invited you as private user
   layouts:
     decidim:
+      timeout_modal:
+        sign_out: Sign out
+        body: You will be logged out i
+        title: You are about to be logged out
       footer:
         download_open_data: Open data
         made_with_open_source: Website made by <a target="_blank" href="https://opensourcepolitics.eu/en/">Open Source Politics</a> with the <a target="_blank" href="https://github.com/decidim/decidim">decidim free software</a>.
