@@ -49,5 +49,4 @@ module DestroyParticipatorySpacePrivateUserExtends
   end
 end
 
-
 Decidim::Admin::DestroyParticipatorySpacePrivateUser.include(DestroyParticipatorySpacePrivateUserExtends)
