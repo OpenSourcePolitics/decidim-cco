@@ -23,9 +23,8 @@ module DestroyParticipatorySpacePrivateUserExtends
 
       return if space.respond_to?("is_transparent") && space.is_transparent?
 
-      user = Decidim::User.find(@participatory_space_private_user.decidim_user_id)
       ids = []
-      follows = Decidim::Follow.where(user: user)
+      follows = Decidim::Follow.where(user: @participatory_space_private_user.decidim_user_id)
       ids << find_space_follow_id(follows, @participatory_space_private_user, space)
       ids << find_children_follows_ids(follows, space)
       follows.where(id: ids.flatten).destroy_all if ids.present?
@@ -34,13 +33,15 @@ module DestroyParticipatorySpacePrivateUserExtends
     def find_space_follow_id(follows, participatory_space_private_user, space)
       follows.where(decidim_followable_type: participatory_space_private_user.privatable_to_type)
              .where(decidim_followable_id: space.id)
-        &.first&.id
+             &.first&.id
     end
 
     def find_children_follows_ids(follows, space)
-      follows.select { |follow| find_object_followed(follow).respond_to?("decidim_component_id") }
-             .select { |follow| space.components.ids.include?(find_object_followed(follow).decidim_component_id) }
-        &.map(&:id)
+      follows.map do |follow|
+        object = find_object_followed(follow) || nil
+        next unless object.respond_to?("decidim_component_id")
+        return follow.id if space.components.ids.include?(object.decidim_component_id)
+      end
     end
 
     def find_object_followed(follow)
