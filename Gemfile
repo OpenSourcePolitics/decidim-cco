@@ -23,6 +23,7 @@ gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publ
 
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "aws-sdk-s3", require: false
+gem "deface"
 gem "faker", "~> 2.14"
 gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
