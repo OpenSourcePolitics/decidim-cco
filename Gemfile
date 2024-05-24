@@ -15,6 +15,7 @@ gem "decidim", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-consultations", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-initiatives", "~> #{DECIDIM_VERSION}.0"
+gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 
 gem "bootsnap", "~> 1.4"
 gem "decidim-decidim_awesome", "0.8.3"

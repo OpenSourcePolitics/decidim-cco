@@ -980,6 +980,7 @@ DEPENDENCIES
   decidim-decidim_awesome (= 0.8.3)
   decidim-dev (~> 0.26.0)
   decidim-initiatives (~> 0.26.0)
+  decidim-templates (~> 0.26.0)
   decidim-term_customizer!
   deface
   dotenv-rails
