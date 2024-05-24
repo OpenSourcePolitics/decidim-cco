@@ -27,7 +27,7 @@ module DestroyParticipatorySpacePrivateUserExtends
       follows = Decidim::Follow.where(user: @participatory_space_private_user.decidim_user_id)
       ids << find_space_follow_id(follows, @participatory_space_private_user, space)
       ids << find_children_follows_ids(follows, space)
-      follows.where(id: ids.flatten).destroy_all if ids.present?
+      follows.where(id: ids.flatten.compact).destroy_all if ids.present?
     end
 
     def find_space_follow_id(follows, participatory_space_private_user, space)
@@ -41,8 +41,8 @@ module DestroyParticipatorySpacePrivateUserExtends
         object = find_object_followed(follow).presence
         next unless object.respond_to?("decidim_component_id")
 
-        return follow.id if space.components.ids.include?(object.decidim_component_id)
-      end.compact
+        follow.id if space.components.ids.include?(object.decidim_component_id)
+      end
     end
 
     def find_object_followed(follow)
